@@ -5,9 +5,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgba(227, 237, 241, 0.753);
+  text-align: center;
+  padding-top: 50px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.calculatorBlock{
+  background-color: dimgray;
+  height: 600px;
+  width: 500px;
+  margin-left: 550px;
+  text-align: left;
+}
+
+#display{
+  height: 90px;
+  background-color: peru;
+}
+
+#buttonBlock, #allClearButtonBlock, #deleteCharacterButtonBlock, #clearButtonBlock, #buttonSeven, #buttonEight, #buttonnine, #plusButton, #buttonFour, #buttonFive, #buttonSix, #buttonThree, #buttonTwo, #buttonOne, #buttonZero, #equalButton, #divisionButtonBlock, #multiplyButtonBlock, #fourthRowButtons, #buttonDecimal{
+  display: inline-block;
+}
+
+#allClearButtonBlock, #deleteCharacterButtonBlock, #buttonSeven, #buttonEight, #buttonnine, #plusButton, #buttonFour, #buttonFive, #buttonSix, #buttonThree, #buttonTwo, #buttonOne, #buttonZero, #equalButton, #divisionButtonBlock, #multiplyButtonBlock, #buttonDecimal{
+  text-align: center;
+  margin-left: 40px;
+  margin-top: 50px;
+  border: 2px solid;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  background-color: rgb(49, 110, 202);
 }

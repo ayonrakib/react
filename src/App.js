@@ -139,13 +139,10 @@ function evaluateFinalExpression(expressionList) {
 //    4. othoba jodi character operator hoy:
 //      1. jodi string number empty string na hoy and exp list er last element empty string na hoy and string number operator na hoy:
 //        1. exp list e push string number
-//        2. log korbo final element
-//        3. exp list e append ocharacter
-//        4. string number hobe empty string
-//        5. exp list log korbo
+//        2. exp list e append ocharacter
+//        3. string number hobe empty string
 //      2. othoba jodi string number empty str hoy and character / and * na hoy:
 //        1. string number a concat character
-//        2. log korbo str number
 
 var expressionList = [];
 var stringNumber = "";

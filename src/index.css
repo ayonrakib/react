@@ -42,3 +42,8 @@ code {
   width: 70px;
   background-color: rgb(49, 110, 202);
 }
+
+#firstNumber, #secondNumber, #add, #subtract, #multiply, #divide{
+  display: inline-block;
+  margin-left: 10px;
+}

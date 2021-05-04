@@ -1,5 +1,5 @@
 // import React, { Component } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 // import ReactDOM from 'react-dom';
 
 // class MyButton2 extends React.Component{
@@ -29,16 +29,16 @@ import React from 'react';
 //    1. jodi character er ACII value 48 and 57 er moddhe hoy:
 //      1. return true
 //    2. return false
-function isDigit(character) {
-  // console.log("character value is: ",character);
-  if(character.charCodeAt(0) >= 48 && character.charCodeAt(0) <= 57){
-    // console.log("ascii value of character is: ", character.charCodeAt(0));
-    // console.log("valid digit");
-    return true;
-  }
-  // console.log("invalid digit");
-  return false;
-} 
+// function isDigit(character) {
+//   // console.log("character value is: ",character);
+//   if(character.charCodeAt(0) >= 48 && character.charCodeAt(0) <= 57){
+//     // console.log("ascii value of character is: ", character.charCodeAt(0));
+//     // console.log("valid digit");
+//     return true;
+//   }
+//   // console.log("invalid digit");
+//   return false;
+// } 
 
 
 // isOperatror
@@ -48,12 +48,12 @@ function isDigit(character) {
 //    1. jodi character +,-,* ba / hoy:
 //      1. return true
 //    2. noile return false
-function isOperator(character) {
-  if(character === "+" || character === "-" || character === "*" || character === "/"){
-    return true;
-  }
-  return false;
-}
+// function isOperator(character) {
+//   if(character === "+" || character === "-" || character === "*" || character === "/"){
+//     return true;
+//   }
+//   return false;
+// }
 
 
 // performDivisionOrMultiplication -> multiple numbers
@@ -71,22 +71,22 @@ function isOperator(character) {
 //      8. operator index  theke 2 ta element kaatbo and result insert korbo
 //      9. operator index -1 theke shuru kore 1 ta element kaatbo
 //      10. log korbo final exp list
-function performDivisionOrMultiplication(expressionList, operator) {
-  while (expressionList.indexOf(`${operator}`) > -1) {
-    console.log(`The first index of ${operator} is: `, expressionList.indexOf(`${operator}`));
-    var index = expressionList.indexOf(`${operator}`);
-    if (operator === "/") {
-      var result = Number(expressionList[index-1]) / Number(expressionList[index+1]);
-    } else {
-      var result = Number(expressionList[index-1]) * Number(expressionList[index+1]);
-    }
-    console.log(`result of ${operator} is: `,result);
-    expressionList.splice(index,2,result.toString());
-    expressionList.splice(index-1,1);
-    console.log(`after ${operator}, exp list is: `, expressionList);
-  }
-  return expressionList;
-}
+// function performDivisionOrMultiplication(expressionList, operator) {
+//   while (expressionList.indexOf(`${operator}`) > -1) {
+//     console.log(`The first index of ${operator} is: `, expressionList.indexOf(`${operator}`));
+//     var index = expressionList.indexOf(`${operator}`);
+//     if (operator === "/") {
+//       var result = Number(expressionList[index-1]) / Number(expressionList[index+1]);
+//     } else {
+//       var result = Number(expressionList[index-1]) * Number(expressionList[index+1]);
+//     }
+//     console.log(`result of ${operator} is: `,result);
+//     expressionList.splice(index,2,result.toString());
+//     expressionList.splice(index-1,1);
+//     console.log(`after ${operator}, exp list is: `, expressionList);
+//   }
+//   return expressionList;
+// }
 
 
 // evaluateFinalExpression
@@ -102,20 +102,22 @@ function performDivisionOrMultiplication(expressionList, operator) {
 //      2. jodi current element - hoy:
 //        1. result = result - porer element er int er sathe jog
 //    5. log korbo result
-function evaluateFinalExpression(expressionList) {
-  expressionList = performDivisionOrMultiplication(expressionList, "/");
-  expressionList = performDivisionOrMultiplication(expressionList, "*");
-  var result = Number(expressionList[0]) ;
-  console.log("result is: ",result);
-  for(var index = 1; index < expressionList.length; index += 2){
-    if (expressionList[index] === "+") {
-      result += Number(expressionList[index+1]);
-    } else {
-      result -= Number(expressionList[index+1]);
-    }
-  }
-  console.log("result is: ",result);
-}
+// function evaluateFinalExpression(expressionList) {
+//   expressionList = performDivisionOrMultiplication(expressionList, "/");
+//   expressionList = performDivisionOrMultiplication(expressionList, "*");
+//   const [result, setResult] = useState(Number(expressionList[0]));
+  // console.log("result is: ",result);
+  // var result = Number(expressionList[0]);
+  // console.log("result is: ",result);
+  // for(var index = 1; index < expressionList.length; index += 2){
+  //   if (expressionList[index] === "+") {
+  //     result += Number(expressionList[index+1]);
+  //   } else {
+  //     result -= Number(expressionList[index+1]);
+  //   }
+  // }
+  // console.log("result is: ",result);
+// }
 
 // evaluateExpressionOnCalculatorButtonPress
 // Input: global expressionList, global stringNumber, character
@@ -144,47 +146,47 @@ function evaluateFinalExpression(expressionList) {
 //      2. othoba jodi string number empty str hoy and character / and * na hoy:
 //        1. string number a concat character
 
-var expressionList = [];
-var stringNumber = "";
-function evaluateExpressionOnCalculatorButtonPress(character){
-  if(character === "."){
-    if(stringNumber.charAt(stringNumber.length-1) !== "." || stringNumber === ""){
-      stringNumber += character;
-    }
-  }
-  else if(character === "="){
-    expressionList.push(stringNumber);
-    stringNumber = "";
-    console.log("The expression list is: ", expressionList);
-    evaluateFinalExpression(expressionList);
-  }
-  else if(!(isOperator(character))){
-    if(!(isDigit(character))){
-      // showModal();
-      // console.log("character is not a digit");
-    }
-    else {
-      if(character !== ""){
-        stringNumber += character;
-        console.log("expression list in isDigit function is: ",expressionList);
-        console.log("string number list is: ",stringNumber);
-      }
-    }
-  }
-  else if(isOperator(character)){
-    if(stringNumber !== "" && expressionList[expressionList.length -1] !== "" && !(isOperator(stringNumber))){
-      expressionList.push(stringNumber);
-      console.log("The final element of exp list is: ", typeof expressionList[expressionList.length -1]);
-      expressionList.push(character);
-      stringNumber = "";
-      console.log("expression list is: ",expressionList);
-    }
-    else if(stringNumber === "" && character !== "/" && character !== "*"){
-      stringNumber += character;
-      console.log("With operator, the string number is: ",stringNumber);
-    }
-  }
-}
+// var expressionList = [];
+// var stringNumber = "";
+// function evaluateExpressionOnCalculatorButtonPress(character){
+//   if(character === "."){
+//     if(stringNumber.charAt(stringNumber.length-1) !== "." || stringNumber === ""){
+//       stringNumber += character;
+//     }
+//   }
+//   else if(character === "="){
+//     expressionList.push(stringNumber);
+//     stringNumber = "";
+//     console.log("The expression list is: ", expressionList);
+//     evaluateFinalExpression(expressionList);
+//   }
+//   else if(!(isOperator(character))){
+//     if(!(isDigit(character))){
+//       // showModal();
+//       // console.log("character is not a digit");
+//     }
+//     else {
+//       if(character !== ""){
+//         stringNumber += character;
+//         console.log("expression list in isDigit function is: ",expressionList);
+//         console.log("string number list is: ",stringNumber);
+//       }
+//     }
+//   }
+//   else if(isOperator(character)){
+//     if(stringNumber !== "" && expressionList[expressionList.length -1] !== "" && !(isOperator(stringNumber))){
+//       expressionList.push(stringNumber);
+//       console.log("The final element of exp list is: ", typeof expressionList[expressionList.length -1]);
+//       expressionList.push(character);
+//       stringNumber = "";
+//       console.log("expression list is: ",expressionList);
+//     }
+//     else if(stringNumber === "" && character !== "/" && character !== "*"){
+//       stringNumber += character;
+//       console.log("With operator, the string number is: ",stringNumber);
+//     }
+//   }
+// }
 
 
 // function performAction(buttonValue, operation)
@@ -192,86 +194,111 @@ function evaluateExpressionOnCalculatorButtonPress(character){
 // operation = []
 
 
-function CalculatorButton(props){
-  return (
-    <div id = {`btn-${props.value}`} onClick={() => evaluateExpressionOnCalculatorButtonPress(`${props.value}`)}>
-      {props.value}
-    </div>
-  )
-}
+// function CalculatorButton(props){
+//   return (
+//     <div id = {`btn-${props.value}`} onClick={() => evaluateExpressionOnCalculatorButtonPress(`${props.value}`)}>
+//       {props.value}
+//     </div>
+//   )
+// }
 
 
 function App(){
-  return (
-    <div>
-      <div className = "calculatorBlock">
-        <div id = "display">
+  const [number1, setNumber1] = useState(0);
+  const [number2, setNumber2] = useState(0);
+  const [result, setresult] = useState(0);
+  // updateFirstNumber
+  // input: event
+  // return: none
+  // method:
+  //    1. setNumber1 method call
+  function updateFirstNumber(event) {
+    setNumber1(Number(event.target.value));
+    console.log("updateFirstNumber => number1: ",number1);
+  }
+  // updateSecondNumber
+  // input: event
+  // return: none
+  // method:
+  //    1. setNumber2 method call
+  function updateSecondNumber(event) {
+    setNumber2(Number(event.target.value));
+    console.log("updateSecondNumber => number2: ",number2);
+  }
 
+  // add
+  // input: none
+  // return: none
+  // method:
+  //    1. setresult with a + b
+  function add() {
+    setresult(number1+number2);
+    console.log("setresult => result is: ",result);
+  }
+
+  // subtract
+  // input: none
+  // return: none
+  // method:
+  //    1. setresult with a - b
+  function subtract() {
+    setresult(number1-number2);
+    console.log("setresult => result is: ",result);
+  }
+
+  // multiply
+  // input: none
+  // return: none
+  // method:
+  //    1. setresult with a * b
+  function multiply() {
+    setresult(number1*number2);
+    console.log("setresult => result is: ",result);
+  }
+
+  // divide
+  // input: none
+  // return: none
+  // method:
+  //    1. setresult with a / b if b != 0
+  function divide() {
+    if(number2 !== 0){
+      setresult(number1/number2);
+      console.log("setresult => result is: ",result);
+    }
+    else{
+      console.log("The divisor cannot be zero!");
+    }
+
+  }
+
+  return (
+    <div id = "numbersBlock">
+      <div id = "firstNumber">
+        <input placeholder = "first number" onChange = {updateFirstNumber}></input>
+      </div>
+      <div id = "secondNumber">
+        <input placeholder = "second number" onChange = {updateSecondNumber}></input>
+      </div>
+      <div>
+        <button onClick = {() => console.log("First Number: ",number1, " and second number: ",number2)}>Print Both Numbers</button>
+      </div>
+      <div>
+        <div id = "add">
+          <button  onClick = {add}>Add</button>
         </div>
-        <div id = "buttonBlock">
-          <div id = "allClearButtonBlock">
-            <CalculatorButton value = {'AC'} />
-          </div>
-          <div id = "deleteCharacterButtonBlock">
-            <CalculatorButton value = {'C'}/>
-          </div>
-          <div id = "divisionButtonBlock">
-            <CalculatorButton value = {'/'}/>
-          </div>
-          <div id = "multiplyButtonBlock">
-            <CalculatorButton value = {'*'}/>
-          </div>
+        <div id = "subtract">
+          <button  onClick = {subtract}>Subtract</button>
         </div>
-        <div id = "firstRowButtons">
-          <div id = "buttonSeven">
-            <CalculatorButton value = {'7'}/>
-          </div>
-          <div id = "buttonEight">
-            <CalculatorButton value = {'8'}/>
-          </div>
-          <div id = "buttonnine">
-            <CalculatorButton value = {'9'}/>
-          </div>
-          <div id = "plusButton">
-            <CalculatorButton value = {'+'}/>
-          </div>
+        <div id = "multiply">
+          <button  onClick = {multiply}>Multiply</button>
         </div>
-        <div id = "secondRowButtons">
-          <div id = "buttonFour">
-            <CalculatorButton value = {'4'}/>
-          </div>
-          <div id = "buttonFive">
-            <CalculatorButton value = {'5'}/>
-          </div>
-          <div id = "buttonSix">
-            <CalculatorButton value = {'6'}/>
-          </div>
-          <div id = "plusButton">
-            <CalculatorButton value = {'-'}/>
-          </div>
+        <div id = "divide">
+          <button  onClick = {divide}>Divide</button>
         </div>
-        <div id = "thirdRowButtons">
-          <div id = "buttonThree">
-            <CalculatorButton value = {'3'}/>
-          </div>
-          <div id = "buttonTwo">
-            <CalculatorButton value = {'2'}/>
-          </div>
-          <div id = "buttonOne">
-            <CalculatorButton value = {'1'}/>
-          </div>
-          <div id = "equalButton">
-            <CalculatorButton value = {'='}/>
-          </div>
-        </div>
-        <div id = "fourthRowButtons">
-          <div id = "buttonZero">
-            <CalculatorButton value = {'0'}/>
-          </div>
-          <div id = "buttonDecimal">
-            <CalculatorButton value = {'.'}/>
-          </div>
-        </div>
+      </div>
+      <div>
+        <button onClick = {() => console.log("result value is: ",result)}>Show Result</button>
       </div>
     </div>
   )
